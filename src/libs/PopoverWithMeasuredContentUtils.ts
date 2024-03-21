@@ -36,14 +36,14 @@ function computeHorizontalShift(anchorLeftEdge: number, menuWidth: number, windo
 function computeVerticalShift(anchorTopEdge: number, menuHeight: number, windowHeight: number): number {
     const popoverBottomEdge = anchorTopEdge + menuHeight;
 
-    if (anchorTopEdge < 0) {
+    if (anchorTopEdge - variables.gutterWidth < 0) {
         // Anchor is in top window Edge, shift bottom by a multiple of four.
-        return roundToNearestMultipleOfFour(0 - anchorTopEdge);
+        return roundToNearestMultipleOfFour(0 - anchorTopEdge + variables.gutterWidth);
     }
 
-    if (popoverBottomEdge > windowHeight) {
+    if (popoverBottomEdge + variables.gutterWidth > windowHeight) {
         // Anchor is in Bottom window Edge, shift top by a multiple of four.
-        return roundToNearestMultipleOfFour(windowHeight - popoverBottomEdge);
+        return roundToNearestMultipleOfFour(windowHeight - popoverBottomEdge - variables.gutterWidth);
     }
 
     // Anchor is not in the gutter, so no need to shift it vertically
